@@ -1,4 +1,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import LandingPage from "./pages/LandingPage";
+import SignInPage from "./pages/SignInPage";
 
 // layouts
 import StudentLayout from "./pages/student/StudentLayout";
@@ -22,7 +24,6 @@ import SupervisorAnalytics from "./pages/supervisor/Analytics";
 import SupervisorSettings from "./pages/supervisor/Settings";
 import SupervisorMessages from "./pages/supervisor/Messages";
 
-
 // coordinator pages
 import CoordinatorDashboard from "./pages/coordinator/Dashboard";
 import CoordinatorInterns from "./pages/coordinator/Interns";
@@ -34,11 +35,9 @@ import CoordinatorMessages from "./pages/coordinator/Messages";
 function App() {
   return (
     <Routes>
+      <Route path="/landingpage" element={<LandingPage />} />
+      <Route path="/signin" element={<SignInPage />} />
 
-      {/* DEFAULT */}
-      <Route path="/" element={<Navigate to="/app" />} />
-
-      {/* STUDENT */}
       <Route path="/app" element={<StudentLayout />}>
         <Route index element={<StudentDashboard />} />
         <Route path="attendance" element={<Attendance />} />
@@ -49,19 +48,16 @@ function App() {
         <Route path="settings" element={<StudentSettings />} />
       </Route>
 
-      {/* SUPERVISOR */}
-      <Route path="/supervisor" element={<SupervisorLayout />}>
+      <Route path="/app/supervisor" element={<SupervisorLayout />}>
         <Route index element={<SupervisorDashboard />} />
         <Route path="interns" element={<Interns />} />
         <Route path="reports" element={<SupervisorReports />} />
         <Route path="analytics" element={<SupervisorAnalytics />} />
         <Route path="settings" element={<SupervisorSettings />} />
         <Route path="messages" element={<SupervisorMessages />} />
-
       </Route>
 
-      {/* COORDINATOR */}
-      <Route path="/coordinator" element={<CoordinatorLayout />}>
+      <Route path="/app/coordinator" element={<CoordinatorLayout />}>
         <Route index element={<CoordinatorDashboard />} />
         <Route path="interns" element={<CoordinatorInterns />} />
         <Route path="reports" element={<CoordinatorReports />} />
@@ -70,6 +66,7 @@ function App() {
         <Route path="messages" element={<CoordinatorMessages />} />
       </Route>
 
+      <Route path="*" element={<Navigate to="/landingpage" replace />} />
     </Routes>
   );
 }
