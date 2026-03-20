@@ -1,6 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
+import PricingPage from "./pages/PricingPage";
+import FeaturesPage from "./pages/FeaturesPage";
 import SignInPage from "./pages/SignInPage";
+import AboutPage from "./pages/AboutPage";
 
 // layouts
 import StudentLayout from "./pages/student/StudentLayout";
@@ -35,9 +38,15 @@ import CoordinatorMessages from "./pages/coordinator/Messages";
 function App() {
   return (
     <Routes>
-      <Route path="/landingpage" element={<LandingPage />} />
+      {/* PUBLIC PAGES */}
+      <Route path="/" element={<LandingPage />} />
+      <Route path="/pricing" element={<PricingPage />} />
+      <Route path="/features" element={<FeaturesPage />} />
       <Route path="/signin" element={<SignInPage />} />
+      <Route path="/aboutpage" element={<AboutPage />} />
 
+
+      {/* STUDENT */}
       <Route path="/app" element={<StudentLayout />}>
         <Route index element={<StudentDashboard />} />
         <Route path="attendance" element={<Attendance />} />
@@ -48,6 +57,7 @@ function App() {
         <Route path="settings" element={<StudentSettings />} />
       </Route>
 
+      {/* SUPERVISOR */}
       <Route path="/app/supervisor" element={<SupervisorLayout />}>
         <Route index element={<SupervisorDashboard />} />
         <Route path="interns" element={<Interns />} />
@@ -57,6 +67,7 @@ function App() {
         <Route path="messages" element={<SupervisorMessages />} />
       </Route>
 
+      {/* COORDINATOR */}
       <Route path="/app/coordinator" element={<CoordinatorLayout />}>
         <Route index element={<CoordinatorDashboard />} />
         <Route path="interns" element={<CoordinatorInterns />} />
@@ -66,7 +77,8 @@ function App() {
         <Route path="messages" element={<CoordinatorMessages />} />
       </Route>
 
-      <Route path="*" element={<Navigate to="/landingpage" replace />} />
+      {/* FALLBACK */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
